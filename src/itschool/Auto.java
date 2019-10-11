@@ -1,25 +1,61 @@
 package itschool;
 
-public class Auto {
-    private int VIN;
+import java.util.Random;
+
+/**
+ * Class  for automobile
+ */
+class Auto {
+    private long vin;
+
+    public Auto(long vin, String model) {
+        this.setVin(vin);
+        this.model = model;
+    }
     private String model;
     private String color;
     private String owner;
 
-    public int getVIN() {
-        return VIN;
+    public Auto(long vin, String model, String color, String owner) {
+        this.setVin(vin);
+        this.model = model;
+        this.color = color;
+        this.owner = owner;
     }
 
-    public void setVIN(int VIN) {
-        this.VIN = VIN;
+    /**
+     * Gets random name of mark
+     *
+     * @return String
+     */
+    public static String getRandomMAKER() {
+        final String[] MAKERS = {"BMW", "VAZ", "ZAZ", "GAZ", "LUAZ"};
+        Random random = new Random();
+        return MAKERS[random.nextInt(MAKERS.length)];
+    }
+
+    public static boolean isCorrectVIN(String vin) {
+        try {
+            long tempVIN = Long.parseLong(vin);
+            if (tempVIN > 9999999999l && tempVIN < 100000000000l) {
+                return true;
+            }
+        } catch (Exception exc) {
+            return false;
+        }
+        return false;
+    }
+
+    public static long getVINIfCorrect(String vin) {
+        return isCorrectVIN(vin) ? Long.parseLong(vin) : -1;
     }
 
     public String getModel() {
         return model;
     }
 
-    public void setModel(String model) {
-        this.model = model;
+    public long getVin() {
+        return vin;
     }
 
     public String getColor() {
@@ -38,24 +74,27 @@ public class Auto {
         this.owner = owner;
     }
 
-    public Auto(int VIN, String model) {
-        this.VIN = VIN;
-        this.model = model;
+    /**
+     * Setter
+     *
+     * @param vin VIN number of auto
+     */
+    public void setVin(final long vin) {
+
+        this.vin = vin;
+
     }
 
-    public Auto(int VIN, String model, String color, String owner) {
-        this.VIN = VIN;
+    public void setModel(final String model) {
         this.model = model;
-        this.color = color;
-        this.owner = owner;
     }
 
     @Override
     public String toString() {
         return "Auto{" +
-                "VIN=" + VIN +
+                "VIN=" + vin +
                 ", model='" + model + '\'' +
-                (this.color != null ? ", color='" + color + '\'' : "") +
+                (!(this.color == null) ? ", color='" + color + '\'' : "") +
                 (this.owner != null ? ", owner='" + owner + '\'' : "") +
                 '}';
     }
