@@ -14,13 +14,12 @@ class Main {
         object = "thysjtd";
         System.out.println(object.getClass());
 
-
         Random random = new Random();
         final Auto auto1 = new Auto(random.nextInt(1000000000), "BYD");
         object = auto1;
         System.out.println(object.getClass());
 
-        Auto auto2 = new Auto(-2345678, "BMW", "silver", "asgdthsfydjukfig");
+        Auto auto2 = new Auto(-2345678, "BMW", "silver", "John Silver");
         //auto2.setVin(-231425365);
         Scanner scanner = new Scanner(System.in);
         String vin = "";
@@ -37,9 +36,13 @@ class Main {
         } while (VIN == -1);
 
         Auto auto4 = new Auto(VIN, Auto.getRandomMAKER());
+
         System.out.println(auto1);
         System.out.println(auto2);
         System.out.println(auto3);
         System.out.println(auto4);
+
+        if (auto1.equals(auto2))
+            System.out.println("Auto 1 is equal to Auto 2");
     }
 }
